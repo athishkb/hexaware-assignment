@@ -13,7 +13,6 @@ Task 1:
 
 3. ER diagram
 
-
 4.   customers:
           alter table customers add primarykey(customerID);
 
