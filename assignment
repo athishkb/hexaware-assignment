@@ -14,24 +14,24 @@ Task 1:
 3. ER diagram
 
 
-4.       customers:
-                  alter table customers add primarykey(customerID);
+4.   customers:
+          alter table customers add primarykey(customerID);
 
-	      products:
-                 alter table products add primary key (productID);
+     products:
+          alter table products add primary key (productID);
 	
-	      orders:
-                alter table orders add primary key (orderID);
-	              alter table orders add  foreign key (customerID) references customers(customerID);
+     orders:
+           alter table orders add primary key (orderID);
+	   alter table orders add  foreign key (customerID) references customers(customerID);
 
-	     orderdetails:
+     orderdetails:
                alter table orderdetails add primary key(orderdetailID);
-	             alter table orderdetails add foreign key(orderID) references orders(orderID);
-	             alter table orderdetails add foreign key(productID) references products(productID);
+	       alter table orderdetails add foreign key(orderID) references orders(orderID);
+	       alter table orderdetails add foreign key(productID) references products(productID);
         
-         inventory:
-	             alter table inventory add primary key(invertoryID);
-	             alter table inventory add foreign key(productID) references products(productID);
+      inventory:
+	        alter table inventory add primary key(invertoryID);
+	        alter table inventory add foreign key(productID) references products(productID);
 
 
 5.      customers:
