@@ -1,0 +1,236 @@
+Task 1:
+1. create database Techshop;
+
+2.  create table customers(customerID int, firstname varchar(30), lastname varchar(30),email varchar(40),phone int, address varchar(150));
+
+    create table products(productID int,productname varchar(30),description varchar(50),price int);
+     
+    create table orders(orderID int,customerID int,orderdate date,totalamount int);
+
+    create table orderdetails(orderdetailID int,orderID int,productID int,quantity int);
+
+    create table inventory(invertoryID int,productID int,quantityinstock int,laststockupdate int);
+
+3. ER diagram
+
+
+4.       customers:
+                  alter table customers add primarykey(customerID);
+
+	      products:
+                 alter table products add primary key (productID);
+	
+	      orders:
+                alter table orders add primary key (orderID);
+	              alter table orders add  foreign key (customerID) references customers(customerID);
+
+	     orderdetails:
+               alter table orderdetails add primary key(orderdetailID);
+	             alter table orderdetails add foreign key(orderID) references orders(orderID);
+	             alter table orderdetails add foreign key(productID) references products(productID);
+        
+         inventory:
+	             alter table inventory add primary key(invertoryID);
+	             alter table inventory add foreign key(productID) references products(productID);
+
+
+5.      customers:
+		 insert into customers (customerID, firstname, lastname, email, phone, address) values
+    ->     (1, 'John', 'Doe', 'john.doe@example.com', '1234567890', '123 Main St, Anytown');
+    ->     (2, 'Jane', 'Smith', 'jane.smith@example.com', '1876543210', '456 Elm St, Othertown');
+    ->     (3, 'Alice', 'Johnson', 'alice.j@example.com', '1551234567', '789 Oak St, AnotherTown'),
+    ->     (4, 'Bob', 'Brown', 'bob.b@example.com', '1445556666', '321 Maple St, Townsville'),
+    ->     (5, 'Emily', 'Davis', 'emily.d@example.com', '1778889999', '567 Pine St, New City'),
+    ->     (6, 'Michael', 'Wilson', 'michael.w@example.com', '1223334444', '890 Cedar St, Westville'),
+    ->     (7, 'Sarah', 'Lee', 'sarah.l@example.com', '1667778888', '234 Birch St, Southtown'),
+    ->     (8, 'David', 'Martinez', 'david.m@example.com', '1112223333', '432 Walnut St, Eastville'),
+    ->     (9, 'Olivia', 'Taylor', 'olivia.t@example.com', '1998887777', '876 Oak St, Northtown'),
+    ->     (10, 'Ethan', 'Anderson', 'ethan.a@example.com', '1334445555', '678 Pine St, Hilltown'); 
+
+
+	     products:
+		 insert into products (productID, productname, description, price) values
+    ->     (1, 'Laptop', 'PC', 999),
+    ->     (2, 'Smartphone', 'phone', 699),
+    ->     (3, 'Headphones', 'common', 149),
+    ->     (4, 'Tablet', 'phone', 499),
+    ->     (5, 'Smartwatch', 'phone', 199),
+    ->     (6, 'Camera', 'common', 899),
+    ->     (7, 'Speaker', 'common', 129),
+    ->     (8, 'Monitor', 'pc', 349),
+    ->     (9, 'Printer', 'common', 199),
+    ->     (10, 'External Hard Drive', 'pc', 79);
+
+    	orders:
+		 insert into orders (orderID, customerID, orderdate, totalamount) values
+    ->     (1, 1, '2024-04-01', 1249),
+    ->     (2, 2, '2024-04-02', 849),
+    ->     (3, 3, '2024-04-03', 949),
+    ->     (4, 4, '2024-04-04', 1049),
+    ->     (5, 5, '2024-04-05', 1149),
+    ->     (6, 6, '2024-04-06', 1249),
+    ->     (7, 7, '2024-04-07', 1349),
+    ->     (8, 8, '2024-04-08', 1449),
+    ->     (9, 9, '2024-04-09', 1549),
+    ->     (10, 10,'2024-04-09', 1649);
+
+    	orderdetails:
+		insert into orderdetails (orderdetailID, orderID, productID, quantity) values
+    ->     (1, 1, 1, 1),
+    ->     (2, 1, 3, 2),
+    ->     (3, 2, 2, 1),
+    ->     (4, 3, 4, 1),
+    ->     (5, 3, 5, 1),
+    ->     (6, 3, 8, 1),
+    ->     (7, 4, 6, 1),
+    ->     (8, 4, 7, 2),
+    ->     (9, 5, 9, 1),
+    ->     (10, 5, 10, 1);
+	
+	    inventory:
+		 insert into inventory (invertoryID, productID, quantityinstock, laststockupdate) values
+    ->     (1, 1, 50, '2024-04-27'),
+    ->     (2, 2, 100, '2024-04-27'),
+    ->     (3, 3, 75, '2024-04-27'),
+    ->     (4, 4, 30, '2024-04-27'),
+    ->     (5, 5, 80, '2024-04-27'),
+    ->     (6, 6, 20, '2024-04-27'),
+    ->     (7, 7, 60, '2024-04-27'),
+    ->     (8, 8, 45, '2024-04-27'),
+    ->     (9, 9, 25, '2024-04-27'),
+    ->     (10, 10, 90, '2024-04-27');
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Task 2:
+
+1. select firstname,lastname,email from customers;
+
+2. select firstname,lastname,orderID, o.customerID,orderdate from orders o,customers c 
+   where c.customerID=o.customerID;
+
+3. insert into customers values(11,"Samantha","white","samantha.w@example.com",1222223333,"111 Cedar St, Anytown");
+
+4. update products set price=price+(price*0.1);
+
+5. delete from orderdetails where orderID=6;
+   delete from orders where orderID=6;
+
+6. insert into orders values(11,11,'2024-04-11',1000);
+
+7. update customers set phone=1166778899 , address="car street mongolia" where customerID=1;
+ 
+8. update orders set totalamount=(select sum(p.price*o.quantity) from products p,orderdetails o where p.productID=o.
+   productID and o.orderID=orders.orderID);
+
+9. delete from orderdetails os join orders o on os.orderID=o.orderID 
+   join customers c on c.customerID=o.customerID 
+   where customerID=1;
+   delete from orders where customerID=1;
+
+10. insert into products values(11,"keyboard","Mechanical, RGB backlight",79);
+
+11. alter table orders add column status varchar(30) default "pending"; 
+    update orders set status="shipped" where orderID="6";
+
+12.  select firstname,count(*) from customers c,orders o
+     where
+     c.customerID=o.customerID group by o.customerID ;
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Task 3
+
+1. select orderID,c.* from orders o,customers c 
+   where c.customerID=o.customerID;
+
+2. select productname, sum(price*quantity) as totalrevenue from products p,orderdetails o 
+   where p.productID=o.productID 
+   group by productname;
+
+3. select distinct firstname,lastname,phone,address from customers c,orders o
+   where c.customerID=o.customerID;
+
+4. select productname, sum(quantity) as totalquantity from products p, orderdetails o 
+   where p.productID=o.productID 
+   group by p.productname 
+   order by totalquantity desc;
+
+5. select productname, discription from products;
+
+6. select firstname,avg(totalamount) as avg_order_value from customers c,orders o 
+   where c.customerID=o.customerID 
+   group by c.customerID;
+
+7. select firstname,lastname, totalamount as totalrevenue from customers c,orders o
+   where c.customerID=o.customerID
+   and totalamount=(select max(totalamount) from orders);
+
+8. select productname,sum(quantity) as no_of_order from products p, orderdetails o
+   where p.productID=o.productID 
+   group by p.productID; 
+
+9. select firstname,lastname from customers c 
+  join orders o on c.customerID=o.customerID 
+  join orderdetails os on os.orderID=o.orderID 
+  join products p on p.productID =os.productID 
+  where p.productname="Tablet";
+
+10. select sum(totalamount) as total_revenue from orders
+    where  orderdate between '2024-04-01' and '2024-04-05';
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Task 4
+
+1. select customerID,firstname,lastname from customers 
+   where customerID not in (select distinct customerID from orders);
+
+2. select sum(quantityinstock) as total_product from inventory;
+
+3. select sum(totalamount) as total_revenue from orders;
+
+4. select avg(quantity) from orderdetails os join products p on os.productID=p.productID 
+   where description="common";
+
+5. select c.customerID,firstname,sum(totalamount) as total_revenue from customers c,orders o
+   where c.customerID = o.customerID and c.customerID=1;
+
+6. select firstname,lastname,count(orderID) as no_of_orders from customers c,orders o
+   where c.customerID=o.customerID 
+   group by c.customerID 
+   order by no_of_orders desc;
+
+7. select description, sum(quantity) as no_of_orders from products p,orderdetails os 
+   where p.productID=os.productID
+   group by description order by sum(quantity) desc;
+
+8. select firstname,lastname, sum(price*quantity) from customers c 
+   join orders o on c.customerID=orderID 
+   join orderdetails os on o.orderID=os.orderID 
+   join products p on p.productID=os.productID 
+   group by c.customerID order by sum(price*quantity) desc;
+
+9. select sum(totalamount)/count(orderID) as avg_total_revenue from orders;
+
+10. select firstname,lastname,count(orderID) as no_of_orders from customers as c 
+    left join orders as o 
+    on c.customerID=o.customerID
+    group by c.customerID;
+
+
+
+
+
+
+
+
+
+
+
